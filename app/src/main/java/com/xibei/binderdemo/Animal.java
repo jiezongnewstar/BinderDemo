@@ -13,11 +13,16 @@ public class Animal implements Parcelable {
 
     private String name;
 
+    private Dog dog;
+
+
+
     private int legsNumber;
 
 
     protected Animal(Parcel in) {
         name = in.readString();
+        dog = in.readParcelable(Dog.class.getClassLoader());
         legsNumber = in.readInt();
     }
 
@@ -41,6 +46,8 @@ public class Animal implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
+        dest.writeParcelable(dog, flags);
         dest.writeInt(legsNumber);
+        dest.writeParcelable(dog,0);
     }
 }
